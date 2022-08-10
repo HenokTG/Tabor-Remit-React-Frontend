@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 
+
 urlpatterns = [
-    path("", home, name="home"),
+    path('transactions/', TransactionsLIstCreateView.as_view(),
+         name='user_registery'),
 ]

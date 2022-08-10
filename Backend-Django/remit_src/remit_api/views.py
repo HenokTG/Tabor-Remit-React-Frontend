@@ -1,5 +1,12 @@
-from django.http import HttpResponse
+from .models import Transactions
+
+from .serializers import TransactionSerializer
+from rest_framework.generics import ListCreateAPIView
+from rest_framework.permissions import IsAdminUser
 
 
-def home(request):
-    return HttpResponse("Hello, Django!")
+class TransactionsLIstCreateView(ListCreateAPIView):
+
+    queryset = Transactions.objects.all()
+    serializer_class = TransactionSerializer
+    permission_classes = [IsAdminUser]
