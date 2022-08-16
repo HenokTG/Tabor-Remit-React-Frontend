@@ -1,16 +1,19 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#Backend Folders
+Backend-Django
+Frontend-ReactJS
 # dependencies
 /.Remitvenv
-Frontend-ReactJS/remit-app/node_modules
-Frontend-ReactJS/remit-app/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # testing
-Frontend-ReactJS/remit-app/coverage
+coverage
 
 # production
-Frontend-ReactJS/remit-app/build
+build
 
 # misc
 .DS_Store
