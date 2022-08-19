@@ -1,0 +1,217 @@
+/* CSS for Summary Page  */
+
+.summary-conatainer {
+    margin: 5rem 0.25rem 1rem;
+    background-color: #fff;
+    box-shadow: rgb(228, 223, 223) 0 0 50px 5px;
+    border-radius: 1rem;
+    padding: 1.5rem 0.5rem;
+    max-width: 700px;
+    min-width: 330px;
+}
+
+.remit-summary {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-inline: 0.5rem;
+}
+
+.total-amount {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #7adcf01b;
+    border-radius: 0.5rem;
+}
+
+.pack-list {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.pack-Container {
+    min-width: 300px;
+    background-color: #0c76bd;
+    margin: 0.35rem 0.35rem;
+    padding: 0.05rem 1rem;
+    border-radius: 0.25rem;
+    color: #fafdfe;
+    cursor: pointer;
+}
+
+.pack-Container:hover {
+    transform: scale(0.98);
+}
+
+.pack-hrt-rule--horizontal {
+    margin: 0.15rem 0 0.15rem;
+    border-top: 0.5px solid #e1dcdcd6;
+}
+
+.Currency-pack {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.etb-pack {
+    margin: 0.5rem 0;
+}
+
+.package-footer {
+    color: #ffd22e;
+    font-size: 12px;
+    margin: 0.5rem 0;
+}
+
+.package-footer-icon {
+    border-radius: 50%;
+    border: #000;
+    background-color: #939697b0;
+    padding: 1px 7px;
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.promoCode-label-text {
+    text-align: right;
+}
+
+.promoCode-input-conatainer h4 {
+    display: inline-block;
+    outline: #000 1px solid;
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+}
+
+.promoCode-input-conatainer h4:hover {
+    font-style: italic;
+    transform: scale(0.95);
+    cursor: pointer;
+}
+
+#promoCode-id {
+    width: 100%;
+    background-color: transparent;
+    color: #004A59;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+
+}
+
+#promoCode-id::placeholder {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+
+}
+
+.promoCode-btn {
+    color: #fafdfe;
+    background-color: #57b750;
+    border-radius: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0 2rem;
+    min-height: 2.5rem;
+}
+
+.promoCode-btn:hover {
+    transform: scale(0.95);
+}
+
+.pay-with-paypal-section {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+#pay-img {
+    margin: 1rem 0 0.25rem;
+    height: 3.5rem;
+}
+
+#paypal-img {
+    margin: 1rem 0 0.25rem;
+    height: 3rem;
+}
+
+.pay-btn {
+    color: #fafdfe;
+    background-color: #3fa5e9;
+    border-radius: 2rem;
+    margin: 1rem 0;
+    min-height: 2.5rem;
+    padding: 0 auto;
+    cursor: pointer;
+}
+
+.pay-btn:hover {
+    background: #0070ba;
+    transform: scale(0.95);
+}
+
+.pay-btn::after {
+    content: "Continue";
+}
+
+.pay-btn:hover::after {
+    content: "Pay with PayPal";
+}
+
+
+@media screen and (max-width : 324px) {
+    .pack-Container {
+        min-width: 260px;
+    }
+
+    .remit-summary,
+    .total-amount,
+    .promoCode-input-conatainer,
+    .pay-with-paypal-section {
+        padding-inline: 0.5rem;
+    }
+
+}
+
+@media screen and (min-width : 325px) and (max-width : 671px) {
+    .pack-Container {
+        min-width: 300px;
+        max-width: 600px;
+    }
+
+    .remit-summary,
+    .total-amount,
+    .promoCode-input-conatainer,
+    .pay-with-paypal-section {
+        padding-inline: 1.25rem;
+    }
+
+}
+
+@media screen and (min-width : 700px) {
+    .summary-conatainer {
+        margin-left: calc(50vw - 350px);
+    }
+
+    .remit-summary,
+    .total-amount,
+    .promoCode-input-conatainer,
+    .pay-with-paypal-section {
+        padding-inline: 3rem;
+    }
+}

@@ -3,6 +3,8 @@ import { ReactNotifications } from "react-notifications-component";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import "./CSS/Home.css"
+import "./CSS/Summary.css"
 import "react-notifications-component/dist/theme.css";
 import "animate.css/animate.min.css";
 

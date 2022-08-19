@@ -26,7 +26,7 @@ function SubmitButton() {
       <h3>Pay with PayPal</h3>
       <img src={payPalLogo} alt="Pay with PayPal" id="pay-img" />
       <h4 style={{fontSize:"14px"}}>You will be redirected to PayPal</h4>
-      <button onClick={handlePayment} className="btn block pay-btn">Continue with PayPal</button>
+      <button onClick={handlePayment} className="btn block pay-btn"></button>
     </section>
   );
 }
