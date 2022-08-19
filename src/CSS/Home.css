@@ -228,7 +228,7 @@
 @media screen and (min-width : 768px) {
 
     .home-conatainer {
-        margin-top: calc(50vh - 4.25rem);
+        margin-top: calc(50vh - 10rem);
     }
 
     .black-bg-section {
@@ -249,7 +249,7 @@
         z-index: 1;
         position: absolute;
         right: 2rem;
-        top: 24vh;
+        top: 20vh;
         width: 21rem;
         box-shadow: rgb(221, 193, 193) 0 0 10px 1px;
         margin-inline: 0.15rem;
@@ -279,7 +279,7 @@
     }
 }
 
-@media screen and (min-width : 768px) and (max-width : 992px){
+@media screen and (min-width : 768px) and (max-width : 992px) {
     #phone-id {
         font-size: 1.6rem;
 
@@ -314,7 +314,6 @@
 
     .floating-form {
         right: 3rem;
-        top: 24vh;
         width: 25rem;
     }
 

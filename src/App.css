@@ -30,7 +30,7 @@
   font-size: calc(10px + 2vmin);
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  box-shadow: rgb(204, 199, 199) 0 1px 20px 1px;
+  box-shadow: rgb(204, 199, 199) 0 1px 2px 1px;
 }
 
 .App-header h1 {
@@ -57,7 +57,7 @@
   height: 8rem;
   padding-top: 4rem;
   background-color: #133d3a;
-  display: none;
+  /* display: none; */
 }
 
 .footer-bottom {
@@ -81,7 +81,7 @@
 
   }
 
-  .App-footer {
+  .footer-bottom {
     padding-inline: calc(50% - 600px);
 
   }
