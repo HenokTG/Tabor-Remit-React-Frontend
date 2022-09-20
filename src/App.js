@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactNotifications } from "react-notifications-component";
+import { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
@@ -19,15 +19,11 @@ function App() {
   return (
     <div className={`App`}>
       <Router>
-        <ReactNotifications />
         <Navbar />
+        <Toaster position="top-center" />
         <Routes>
           <Route path="/" element={<HomePage />} exact />
-          <Route
-            path="/summary"
-            element={<Summary />}
-            exact
-          />
+          <Route path="/summary" element={<Summary />} exact />
         </Routes>
         <Footer />
       </Router>

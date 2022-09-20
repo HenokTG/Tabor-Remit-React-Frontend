@@ -1,8 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-#Backend Folders
-/Backend_Django
-/Frontend_ReactJS
+
 # dependencies
 /.Remitvenv
 node_modules

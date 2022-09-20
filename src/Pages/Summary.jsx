@@ -1,34 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import BasicInfo from "../Components/BasicInfo";
+import Operators from "../Components/Operators";
 import Packages from "../Components/Packages";
+import AmountSummary from "../Components/AmountSummary";
 import PromoCodeForm from "../Components/PromoCodeForm";
 import SubmitButton from "../Components/SubmitButton";
 
 import { useGlobalContext } from "../context";
-import { returnValue } from "../module";
+import { returnSummary, fetchOperators, fetchPackages } from "../modules";
 
 function Summary() {
-  const packagesList = [100.0, 200.0, 500.0, 1000.0, 2000.0, 5000.0];
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingFailed, setIsLoadingFailed] = useState(false);
+
   const {
-    promo,
-    discount,
     phoneNo,
-    operator,
-    summaryMax,
+    operatorsList,
+    setOperatorsList,
+    operatorSelected,
+    packagesList,
+    setPackagesList,
     packageSelected,
-    transferdAmount,
+    summaryMax,
+    isPromoted,
   } = useGlobalContext();
 
-  console.log("Transferded Amount: ", transferdAmount);
-  const [serviceCharge, conversionRate, summaryData, totalAmount] = returnValue(
-    promo,
-    operator,
-    discount,
+  useEffect(() => {
+    setIsLoading(true);
+    setIsLoadingFailed(false);
+    fetchOperators(setOperatorsList, setIsLoadingFailed);
+    fetchPackages(setPackagesList, setIsLoading, setIsLoadingFailed);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const summaryData = returnSummary(
     phoneNo,
-    transferdAmount
+    operatorSelected.operator,
+    isPromoted.promoCode
   );
-  const packUSD = (1 + serviceCharge) * conversionRate;
+
   return (
     <div className="summary-conatainer">
       <h2 style={{ marginBottom: "1rem" }}>Summary</h2>
@@ -39,17 +50,24 @@ function Summary() {
           </div>
         );
       })}
+      {!operatorSelected.isOpSelected && (
+        <Operators operatorsList={operatorsList} />
+      )}
       <div className="hrt-rule--horizontal"></div>
-      {packageSelected ? (
+      {packageSelected.packageChosen ? (
         <>
-          <div className="total-amount">
-            <h2>Total Charge: </h2>
-            <h2>$ {totalAmount.toFixed(2)}</h2>
-          </div>
+          <AmountSummary />
           <div className="hrt-rule--horizontal"></div>
           <PromoCodeForm />
           <div className="hrt-rule--horizontal"></div>
-          <SubmitButton />
+          <PayPalScriptProvider
+            options={{
+              "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
+              components: "buttons",
+            }}
+          >
+            <SubmitButton />
+          </PayPalScriptProvider>
         </>
       ) : (
         <section className="package-section">
@@ -57,15 +75,29 @@ function Summary() {
             <h3>Choose the Package</h3>
           </div>
           <div className="pack-list">
-            {packagesList.map((pkElem, pkInx) => (
-              <div className="pack-index" key={pkInx}>
-                <Packages
-                  packUSD={pkElem * packUSD}
-                  pkData={pkElem}
-                  serviceCharge={serviceCharge}
-                />
-              </div>
-            ))}
+            {packagesList &&
+              packagesList.map((pkElem, pkInx) => {
+                const {
+                  selling_price_ETB,
+                  airtime_value,
+                  selling_price_USD,
+                  discount_rate,
+                } = pkElem;
+                const servChrg =
+                  (selling_price_ETB - airtime_value) / airtime_value;
+                return (
+                  <div className="pack-index" key={pkInx}>
+                    <Packages
+                      packId={pkElem.id}
+                      packUSD={selling_price_USD * (1 - discount_rate)}
+                      pkData={airtime_value}
+                      serviceCharge={(servChrg * (1 - discount_rate)).toFixed(
+                        4
+                      )}
+                    />
+                  </div>
+                );
+              })}
           </div>
         </section>
       )}

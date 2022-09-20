@@ -2,19 +2,35 @@ import React from "react";
 
 import { useGlobalContext } from "../context";
 
-function Packages({ pkData, packUSD, serviceCharge }) {
-  const { setTransferdAmount, setPackageSelected, setSummaryMax, setDiscount } =
-    useGlobalContext();
+function Packages({ packId, pkData, packUSD, serviceCharge }) {
+  const {
+    packagesList,
+    setTransferdAmount,
+    chargedAmount,
+    setChargedAmount,
+    operatorSelected,
+    setPackageSelected,
+  } = useGlobalContext();
 
-  const handlePackage = () => {
-    console.log("Package Selected!", pkData, packUSD);
-    setPackageSelected(true);
+  const choosePackage = () => {
+    const operDisc =
+      operatorSelected.operator !== null
+        ? operatorSelected.operator.operator_discount_rate
+        : 0;
+    console.log("Discount Check: ", chargedAmount, operDisc);
+
+    const packagePicked = packagesList.filter((elem) => elem.id === packId)[0];
+    console.log("Package Selected!", pkData, packUSD, packagePicked);
+    setPackageSelected({
+      packageChosen: true,
+      package: packagePicked,
+    });
     setTransferdAmount(pkData);
-    setSummaryMax(4);
-    setDiscount(0.1);
+    setChargedAmount(packUSD * (1 - operDisc));
   };
+
   return (
-    <div className="pack-Container" onClick={handlePackage}>
+    <div className="pack-Container" onClick={choosePackage}>
       <div className="Currency-pack etb-pack">
         <p>The customer gets: </p>
         <h4>{pkData} ETB</h4>

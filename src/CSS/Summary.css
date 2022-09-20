@@ -32,6 +32,39 @@
     border-radius: 0.5rem;
 }
 
+.operator-section {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.operator-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    gap: 2rem;
+    align-items: center;
+    margin: 1rem;
+    text-decoration: none;
+    color: #0258a9;
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+.operator-wrapper strong{
+    text-align: left ;
+}
+
+.operator-container div:hover {
+    font-size: x-large;
+    background-color: rgba(203, 233, 208, 0.741);
+    color: rgb(54, 39, 39);
+    border-radius: 1rem;
+}
+
+.operator-img {
+    width: 3rem;
+    height: 3rem;
+    /* border-radius: 50%; */
+}
+
 .pack-list {
     display: flex;
     flex-flow: row wrap;

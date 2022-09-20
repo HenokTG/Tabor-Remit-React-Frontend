@@ -1,32 +1,101 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 import { useGlobalContext } from "../context";
+import { handleInvoice } from "../modules";
 
 import payPalLogo from "../Images/paypal-logo.png";
+import { useState } from "react";
+import { useEffect } from "react";
+
+const amount = "2";
+
 function SubmitButton() {
   const history = useNavigate();
-  
-  const { isPromoted, operator, phoneNo, transferdAmount } =
-    useGlobalContext();
+
+  const [promoKey, setPromoKey] = useState("");
+  const [valCharged, setValCharged] = useState(0);
+
+  const {
+    operatorSelected,
+    packageSelected,
+    isPromoted,
+    phoneNo,
+    transferdAmount,
+    chargedAmount,
+  } = useGlobalContext();
+
+  useEffect(() => {
+    const prKey = isPromoted.promoCode
+      ? isPromoted.promoCode.promo_code
+      : "NOPROMO";
+    setPromoKey(prKey);
+    setValCharged(chargedAmount);
+  }, [chargedAmount]);
 
   const paymentDetail = {
-    "Phone Number": phoneNo,
-    "Transferred Package Amount in ETB:": transferdAmount,
-    "Operator": operator,
-    "Promo discount code": isPromoted,
+    AgentCode: "Henok",
+    phoneNumber: phoneNo,
+    operatorID: operatorSelected.operator.id,
+    packageID: packageSelected.package.id,
+    promoCode: promoKey,
+    airtimeValue: transferdAmount,
+    valueCharged: valCharged,
+    payMethodID: 1,
   };
-  const handlePayment=()=>{
-    console.log("Payment redirected to Paypal");
-    console.log("Payment Detail: ", paymentDetail);
-    history("/");
-  }
+
   return (
     <section className="pay-with-paypal-section">
-      <h3>Pay with PayPal</h3>
       <img src={payPalLogo} alt="Pay with PayPal" id="pay-img" />
-      <h4 style={{fontSize:"14px"}}>You will be redirected to PayPal</h4>
-      <button onClick={handlePayment} className="btn block pay-btn"></button>
+      <h4 style={{ fontSize: "14px", marginBottom: "1rem" }}>
+        You will be redirected to PayPal
+      </h4>
+      <PayPalButtons
+        style={{
+          layout: "vertical",
+          color: "blue",
+          label: "pay",
+          shape: "pill",
+          height: 45,
+        }}
+        disabled={false}
+        forceReRender={[valCharged]}
+        createOrder={async function (data, actions) {
+          const orderId = await actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: valCharged,
+                  currency: "USD",
+                },
+              },
+            ],
+          });
+          // Your code here after create the order
+          console.log("Order ID: ", orderId);
+          return orderId;
+        }}
+        onApprove={async function (data, actions) {
+          const details = await actions.order.capture();
+          toast.success(
+            "Transaction Completed. Thank you, " +
+              details.payer.name.given_name,
+            { duration: 5000 }
+          );
+          console.log("Check Order ID: ", data);
+          handleInvoice(paymentDetail, history, data.orderID);
+        }}
+        onCancel={function () {
+          toast("Transaction cancelled.");
+        }}
+        onError={function () {
+          toast.error(
+            "There was an error with your transaction. Please Try Again"
+          );
+        }}
+      />
     </section>
   );
 }

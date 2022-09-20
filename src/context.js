@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 const myContext = React.createContext();
 
@@ -7,60 +7,51 @@ export const useGlobalContext = () => {
 };
 
 export default function AppProvider({ children }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingFailed, setIsLoadingFailed] = useState(false);
-  const [packages, setPackages] = useState([]);
-  const [promo, setPromo] = useState(0);
-  const [discount, setDiscount] = useState(0);
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [urlRedirect, setUrlRedirect] = useState(null);
-  const [isPromoted, setIsPromoted] = useState(false);
-  const [packageSelected, setPackageSelected] = useState(false);
   const [preparing, setPreparing] = useState(false);
-  const [promoting, setPromoting] = useState(false);
-  const [operator, setOperator] = useState("Ethio Telecom");
-  const [phoneNo, setPhoneNo] = useState(null);
-  const [summaryMax, setSummaryMax] = useState(3);
   const [transferdAmount, setTransferdAmount] = useState(0);
+  const [chargedAmount, setChargedAmount] = useState(0);
+  const [operatorsList, setOperatorsList] = useState([]);
+  const [operatorSelected, setOperatorSelected] = useState({
+    isOpSelected: false,
+    operator: null,
+  });
+  const [packagesList, setPackagesList] = useState([]);
+  const [packageSelected, setPackageSelected] = useState({
+    packageChosen: false,
+    package:null,
+  });
 
-  useEffect(() => {
-    setIsLoading(true);
-    setIsLoadingFailed(false);
-  }, []);
+  const [isPromoted, setIsPromoted] = useState({
+    isAdd: true,
+    isPromoted: false,
+    promoCode: null,
+  });
+  const [phoneNo, setPhoneNo] = useState(920809496);
+  const [summaryMax, setSummaryMax] = useState(2);
 
   return (
     <myContext.Provider
       value={{
-        isLoading,
-        setIsLoading,
-        isLoadingFailed,
-        setIsLoadingFailed,
-        packages,
-        setPackages,
-        promo,
-        setPromo,
-        discount,
-        setDiscount,
-        totalAmount,
-        setTotalAmount,
-        urlRedirect,
-        setUrlRedirect,
-        isPromoted,
-        setIsPromoted,
-        packageSelected,
-        setPackageSelected,
         preparing,
         setPreparing,
-        promoting,
-        setPromoting,
-        operator,
-        setOperator,
         phoneNo,
         setPhoneNo,
-        summaryMax,
-        setSummaryMax,
         transferdAmount,
         setTransferdAmount,
+        chargedAmount,
+        setChargedAmount,
+        operatorsList,
+        setOperatorsList,
+        operatorSelected,
+        setOperatorSelected,
+        packagesList,
+        setPackagesList,
+        packageSelected,
+        setPackageSelected,
+        isPromoted,
+        setIsPromoted,
+        summaryMax,
+        setSummaryMax,
       }}
     >
       {children}

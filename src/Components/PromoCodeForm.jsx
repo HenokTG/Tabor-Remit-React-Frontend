@@ -1,34 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useGlobalContext } from "../context";
+import { checkPromoCode } from "../modules";
 
 function PromoCodeForm() {
-
   const [promoCodeValue, setPromoCodeValue] = useState("");
-  const [showPromoForm, setShowPromoForm] = useState(false);
-  const [addPromoForm, setAddPromoForm] = useState(true);
-  const { setSummaryMax, setPromo, setIsPromoted } = useGlobalContext();
+  const {
+    setSummaryMax,
+    isPromoted,
+    setIsPromoted,
+    chargedAmount,
+    setChargedAmount,
+    operatorSelected,
+    packageSelected,
+  } = useGlobalContext();
 
-  const handlePromoCode = (e) => {
-    e.preventDefault();
-    console.log("Promo Code Submited!", promoCodeValue);
-    setSummaryMax(5);
-    setPromo(0.2);
-    setShowPromoForm(false);
-    setAddPromoForm(false);
-    setIsPromoted(true);
+  const setPromotedAmount = () => {
+    const promoDisc = isPromoted.promoCode.promo_discount_rate;
+    setChargedAmount(chargedAmount * (1 - promoDisc));
+    console.log(
+      "Promo Check: ",
+      chargedAmount,
+      promoDisc,
+      isPromoted.promoCode
+    );
   };
+  const resetAmount = () => {
+    const packUSD =
+      packageSelected.package.selling_price_USD *
+      (1 - packageSelected.package.discount_rate);
+    const operDisc = operatorSelected.operator.operator_discount_rate;
+    const chargAmt = packUSD * (1 - operDisc);
+
+    console.log("Package: ", packageSelected, chargAmt);
+    setChargedAmount(chargAmt);
+  };
+
+  useEffect(() => {
+    if (isPromoted.promoCode !== null && isPromoted.isPromoted === false) {
+      setPromotedAmount();
+    } else {
+      resetAmount();
+      setSummaryMax(4);
+    }
+  }, [isPromoted]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <section
       id="promoCode-input-section"
       className="promoCode-input-conatainer"
     >
-      {!showPromoForm ? (
-        <h4 onClick={() => setShowPromoForm(true)}>
-          {addPromoForm ? "Add" : "Edit"} Promo Code
+      {!isPromoted.isPromoted ? (
+        <h4 onClick={() => setIsPromoted({ ...isPromoted, isPromoted: true })}>
+          {isPromoted.isAdd ? "Add" : "Change"} Promo Code
         </h4>
       ) : (
-        <form onSubmit={handlePromoCode} className="phone-form">
+        <form
+          onSubmit={(e) =>
+            checkPromoCode(e, promoCodeValue, setSummaryMax, setIsPromoted)
+          }
+          className="phone-form"
+        >
           <input
             type="text"
             id="promoCode-id"
