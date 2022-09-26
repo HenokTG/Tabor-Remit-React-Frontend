@@ -1,7 +1,7 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 import { useGlobalContext } from "../context";
 import { handleInvoice } from "../modules";
@@ -9,8 +9,6 @@ import { handleInvoice } from "../modules";
 import payPalLogo from "../Images/paypal-logo.png";
 import { useState } from "react";
 import { useEffect } from "react";
-
-const amount = "2";
 
 function SubmitButton() {
   const history = useNavigate();
@@ -42,7 +40,7 @@ function SubmitButton() {
     packageID: packageSelected.package.id,
     promoCode: promoKey,
     airtimeValue: transferdAmount,
-    valueCharged: valCharged,
+    valueCharged: valCharged.toFixed(2),
     payMethodID: 1,
   };
 
@@ -67,7 +65,7 @@ function SubmitButton() {
             purchase_units: [
               {
                 amount: {
-                  value: valCharged,
+                  value: valCharged.toFixed(2),
                   currency: "USD",
                 },
               },

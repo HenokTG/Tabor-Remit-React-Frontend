@@ -124,7 +124,8 @@ export const handleInvoice = (paymentDetail, history, orderID) => {
     .post(postURL, paymentDetail)
     .then(function (response) {
       console.log(response);
-      history("/");
+      // history("/");
+      window.location.href = "/";
     })
     .catch(function (error) {
       console.log(error);
