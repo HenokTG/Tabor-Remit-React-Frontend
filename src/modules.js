@@ -123,9 +123,7 @@ export const handleInvoice = (paymentDetail, history, orderID) => {
   axiosInstance
     .post(postURL, paymentDetail)
     .then(function (response) {
-      console.log(response);
-      // history("/");
-      window.location.href = "/";
+      window.location.replace(window.location.origin)
     })
     .catch(function (error) {
       console.log(error);
