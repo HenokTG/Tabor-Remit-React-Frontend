@@ -1,6 +1,6 @@
 import { axiosInstance } from "./axios";
 
-export const returnSummary = (phoneNo, operator, promo) => {
+export const returnSummary = (phoneNo, operator, mobPackage, promo) => {
   phoneNo = String(phoneNo);
   const customerNumber =
     "+251 " +
@@ -19,6 +19,10 @@ export const returnSummary = (phoneNo, operator, promo) => {
       lineValue: `${operator && operator.operator_discount_rate * 100}%`,
     },
     {
+      lineTitle: "Airtime Amount",
+      lineValue: mobPackage && `${mobPackage.airtime_value} Birr`,
+    },
+    {
       lineTitle: "Promotion Discount",
       lineValue: `${promo && promo.promo_discount_rate * 100}%`,
     },
@@ -28,21 +32,34 @@ export const returnSummary = (phoneNo, operator, promo) => {
 };
 
 //Fetch List of Operators
-export const fetchOperators = (setOperatorsList, setIsLoadingFailed) => {
+export const fetchOperators = (
+  setOperatorsList,
+  setIsLoadingFailed,
+  setOperatorSelected,
+  setSummaryMax
+) => {
   axiosInstance
     .get("api/remit/operators/")
     .then((res) => {
-      const operatorList = res.data.sort((a, b) =>
-        a.operator_order > b.operator_order
-          ? 1
-          : a.operator_order === b.operator_order
-          ? a.operator_name > b.operator_name
+      const operatorList = res.data
+        .filter((oper) => oper.id !== 0)
+        .sort((a, b) =>
+          a.operator_order > b.operator_order
             ? 1
+            : a.operator_order === b.operator_order
+            ? a.operator_name > b.operator_name
+              ? 1
+              : -1
             : -1
-          : -1
-      );
+        );
       setOperatorsList(operatorList);
-      console.log("Operators: ", res.data);
+      if (operatorList.length === 1) {
+        setOperatorSelected({
+          isOpSelected: true,
+          operator: operatorList[0],
+        });
+        setSummaryMax(4);
+      }
     })
     .catch(function (error) {
       setIsLoadingFailed(true);
@@ -60,18 +77,19 @@ export const fetchPackages = (
   axiosInstance
     .get("api/remit/packages/")
     .then((res) => {
-      const packageList = res.data.sort((a, b) =>
-        a.package_order > b.package_order
-          ? 1
-          : a.package_order === b.package_order
-          ? a.airtime_value > b.airtime_value
+      const packageList = res.data
+        .filter((mobPack) => mobPack.id !== 0)
+        .sort((a, b) =>
+          a.package_order > b.package_order
             ? 1
+            : a.package_order === b.package_order
+            ? a.airtime_value > b.airtime_value
+              ? 1
+              : -1
             : -1
-          : -1
-      );
+        );
       setPackagesList(packageList);
       setIsLoading(false);
-      console.log("Packages: ", packageList);
     })
     .catch(function (error) {
       setIsLoadingFailed(true);
@@ -91,7 +109,7 @@ export const checkPromoCode = (e, promocode, setSummaryMax, setIsPromoted) => {
       if (res.data.message) {
         const invalidPromo = res.data.message;
         console.log("Promo Status: ", invalidPromo);
-        setSummaryMax(4);
+        setSummaryMax(5);
         setIsPromoted({
           isAdd: true,
           isPromoted: true,
@@ -99,7 +117,7 @@ export const checkPromoCode = (e, promocode, setSummaryMax, setIsPromoted) => {
         });
       } else {
         const validPromo = !res.data.message && res.data;
-        setSummaryMax(5);
+        setSummaryMax(6);
         setIsPromoted({
           isAdd: false,
           isPromoted: false,
@@ -123,10 +141,9 @@ export const handleInvoice = (paymentDetail, history, orderID) => {
   axiosInstance
     .post(postURL, paymentDetail)
     .then(function (response) {
-      window.location.replace(window.location.origin)
+      window.location.replace(window.location.origin);
     })
     .catch(function (error) {
       console.log(error);
     });
 };
-

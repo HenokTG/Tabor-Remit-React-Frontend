@@ -25,18 +25,26 @@ function Summary() {
     packageSelected,
     summaryMax,
     isPromoted,
+    setSummaryMax,
+    setOperatorSelected,
   } = useGlobalContext();
 
   useEffect(() => {
     setIsLoading(true);
     setIsLoadingFailed(false);
-    fetchOperators(setOperatorsList, setIsLoadingFailed);
+    fetchOperators(
+      setOperatorsList,
+      setIsLoadingFailed,
+      setOperatorSelected,
+      setSummaryMax
+    );
     fetchPackages(setPackagesList, setIsLoading, setIsLoadingFailed);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const summaryData = returnSummary(
     phoneNo,
     operatorSelected.operator,
+    packageSelected.package,
     isPromoted.promoCode
   );
 
@@ -94,6 +102,7 @@ function Summary() {
                       serviceCharge={(servChrg * (1 - discount_rate)).toFixed(
                         4
                       )}
+                      setSummaryMax={setSummaryMax}
                     />
                   </div>
                 );

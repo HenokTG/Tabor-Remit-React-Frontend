@@ -2,11 +2,10 @@ import React from "react";
 
 import { useGlobalContext } from "../context";
 
-function Packages({ packId, pkData, packUSD, serviceCharge }) {
+function Packages({ packId, pkData, packUSD, serviceCharge, setSummaryMax }) {
   const {
     packagesList,
     setTransferdAmount,
-    chargedAmount,
     setChargedAmount,
     operatorSelected,
     setPackageSelected,
@@ -17,18 +16,17 @@ function Packages({ packId, pkData, packUSD, serviceCharge }) {
       operatorSelected.operator !== null
         ? operatorSelected.operator.operator_discount_rate
         : 0;
-    console.log("Discount Check: ", chargedAmount, operDisc);
 
     const packagePicked = packagesList.filter((elem) => elem.id === packId)[0];
-    console.log("Package Selected!", pkData, packUSD, packagePicked);
+
     setPackageSelected({
       packageChosen: true,
       package: packagePicked,
     });
+    setSummaryMax(5);
     setTransferdAmount(pkData);
     setChargedAmount(packUSD * (1 - operDisc));
   };
-
   return (
     <div className="pack-Container" onClick={choosePackage}>
       <div className="Currency-pack etb-pack">

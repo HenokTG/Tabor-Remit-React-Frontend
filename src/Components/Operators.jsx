@@ -7,17 +7,14 @@ function Operators({ operatorsList }) {
     useGlobalContext();
 
   const chooseOperator = (operatorId) => {
-    console.log("Operator Selected!", operatorId);
     const operatorPicked = operatorsList.filter(
       (elem) => elem.id === operatorId
     )[0];
-    console.log("Operator Selected!", operatorPicked);
     setOperatorSelected({
       isOpSelected: true,
       operator: operatorPicked,
     });
     setSummaryMax(4);
-    console.log("Operator Check: ", chargedAmount);
   };
 
   return (
@@ -47,7 +44,6 @@ function Operators({ operatorsList }) {
             );
           })}
       </div>
-      {/* <div className="hrt-rule--horizontal"></div> */}
     </div>
   );
 }

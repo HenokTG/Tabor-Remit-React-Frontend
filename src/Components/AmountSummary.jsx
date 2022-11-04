@@ -3,8 +3,7 @@ import React from "react";
 import { useGlobalContext } from "../context";
 
 function AmountSummary() {
-  const { transferdAmount, chargedAmount } = useGlobalContext();
-  console.log("Transferded Value and Cost : ", transferdAmount, chargedAmount);
+  const { chargedAmount } = useGlobalContext();
 
   return (
     <div className="total-amount">

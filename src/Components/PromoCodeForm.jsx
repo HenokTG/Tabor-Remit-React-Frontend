@@ -32,7 +32,6 @@ function PromoCodeForm() {
     const operDisc = operatorSelected.operator.operator_discount_rate;
     const chargAmt = packUSD * (1 - operDisc);
 
-    console.log("Package: ", packageSelected, chargAmt);
     setChargedAmount(chargAmt);
   };
 
