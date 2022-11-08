@@ -1,13 +1,33 @@
 /* CSS for Summary Page  */
 
+.summary-loading,
+.failed-loading {
+    background-color: #fff;
+    box-shadow: rgb(228, 223, 223) 0 0 50px 5px;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.summary-loading {
+    padding: 10rem;
+    height: 26rem;
+    width: 26rem;
+}
+
+.failed-loading {
+    background-color: rgb(234, 86, 86);
+    color: #fafdfe;
+    padding: 2rem;
+    width: 26rem;
+}
+
 .summary-conatainer {
-    margin: 5rem 0.25rem 1rem;
     background-color: #fff;
     box-shadow: rgb(228, 223, 223) 0 0 50px 5px;
     border-radius: 1rem;
     padding: 1.5rem 0.5rem;
-    max-width: 700px;
-    min-width: 330px;
+    width: 700px;
+    margin: 0.5rem;
 }
 
 .remit-summary {
@@ -17,7 +37,25 @@
     justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1rem;
-    padding-inline: 0.5rem;
+    padding-inline: 1rem;
+}
+
+#green-amount-text {
+    color: #57b750;
+}
+
+.amount-edit-btn {
+    border: 1px solid #198CF0FF;
+    color: #198CF0FF;
+    background-color: aliceblue;
+    padding: 0.25rem 1rem;
+    border-radius: 0.5rem;
+    font-size: small;
+}
+
+.amount-edit-btn:hover {
+    transform: scale(0.9);
+    cursor: pointer;
 }
 
 .total-amount {
@@ -48,8 +86,9 @@
     font-size: 1.15rem;
     cursor: pointer;
 }
-.operator-wrapper strong{
-    text-align: left ;
+
+.operator-wrapper strong {
+    text-align: left;
 }
 
 .operator-container div:hover {
@@ -62,7 +101,6 @@
 .operator-img {
     width: 3rem;
     height: 3rem;
-    /* border-radius: 50%; */
 }
 
 .pack-list {
@@ -136,6 +174,13 @@
     cursor: pointer;
 }
 
+.promo-form {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    column-gap: 0rem;
+}
+
 #promoCode-id {
     width: 100%;
     background-color: transparent;
@@ -143,29 +188,32 @@
     text-align: left;
     padding: 0.5rem 1rem;
     margin-top: 0.5rem;
+    min-height: 2.5rem;
     font-size: 1.3rem;
     font-weight: 700;
-    border-radius: 0.5rem;
-
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
 }
 
 #promoCode-id::placeholder {
     font-size: 1.2rem;
     margin-bottom: 0;
-
 }
 
 .promoCode-btn {
+    display: inline-block;
+    width: auto;
     color: #fafdfe;
     background-color: #57b750;
-    border-radius: 0.5rem;
-    margin-top: 0.75rem;
-    padding: 0 2rem;
+    border-radius: 0;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    margin-top: 0.5rem;
     min-height: 2.5rem;
 }
 
 .promoCode-btn:hover {
-    transform: scale(0.95);
+    transform: scale(0.99);
 }
 
 .pay-with-paypal-section {
@@ -208,8 +256,12 @@
 
 
 @media screen and (max-width : 324px) {
+    .summary-conatainer {
+        width: 100%;
+    }
+
     .pack-Container {
-        min-width: 260px;
+        min-width: 250px;
     }
 
     .remit-summary,
@@ -237,11 +289,8 @@
 }
 
 @media screen and (min-width : 700px) {
-    .summary-conatainer {
-        margin-left: calc(50vw - 350px);
-    }
 
-    .remit-summary,
+    y .remit-summary,
     .total-amount,
     .promoCode-input-conatainer,
     .pay-with-paypal-section {

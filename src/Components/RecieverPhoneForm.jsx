@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
 function RecieverPhoneForm() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { phoneNo, setPhoneNo, setPackageSelected } = useGlobalContext();
   const [phoneValue, setPhonevalue] = useState("");
 
@@ -12,7 +12,7 @@ function RecieverPhoneForm() {
     e.preventDefault();
     setPhoneNo(phoneValue);
     setPackageSelected(false);
-    history("/summary");
+    navigate("/summary");
     console.log(phoneNo);
   };
 

@@ -29,6 +29,9 @@ export default function AppProvider({ children }) {
   const [phoneNo, setPhoneNo] = useState(920809496);
   const [summaryMax, setSummaryMax] = useState(2);
 
+  const [pathName, setPathName] = useState("");
+
+
   return (
     <myContext.Provider
       value={{
@@ -52,6 +55,8 @@ export default function AppProvider({ children }) {
         setIsPromoted,
         summaryMax,
         setSummaryMax,
+        pathName,
+        setPathName,
       }}
     >
       {children}

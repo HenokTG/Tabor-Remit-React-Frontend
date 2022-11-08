@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import footerImage from "../Images/remittance.jpg";
+
 import PhoneForm from "../Components/RecieverPhoneForm";
 import shareLogo from "../Images/Remit-Bg.png";
 import payPalLogo from "../Images/paypal-logo.png";
@@ -63,6 +65,13 @@ function HomePage() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
             at fuga ipsum doloremque iste quod labore. Tempore!
           </h3>
+        </div>
+        <div className="footer-content">
+          <img
+            src={footerImage}
+            alt="Remmitance coin"
+            className="footer-cute"
+          />
         </div>
       </section>
     </div>

@@ -6,6 +6,8 @@
     justify-content: center;
     gap: 1rem;
     margin-top: 5rem;
+    min-width: 270px;
+
 }
 
 #mobile-img {

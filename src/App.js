@@ -1,10 +1,14 @@
 import React from "react";
-import { Toaster } from "react-hot-toast";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import "./App.css";
-import "./CSS/Home.css"
-import "./CSS/Summary.css"
+import "./CSS/Home.css";
+import "./CSS/Summary.css";
 import "react-notifications-component/dist/theme.css";
 import "animate.css/animate.min.css";
 
@@ -13,17 +17,22 @@ import Footer from "./Components/Footer";
 
 import HomePage from "./Pages/Homepage";
 import Summary from "./Pages/Summary";
+import Error from "./Pages/Error";
+import Success from "./Pages/Success";
+import NotFound from "./Pages/NotFound";
 
 function App() {
- 
   return (
     <div className={`App`}>
       <Router>
         <Navbar />
-        <Toaster position="top-center" />
         <Routes>
           <Route path="/" element={<HomePage />} exact />
-          <Route path="/summary" element={<Summary />} exact />
+          <Route path="summary" element={<Summary />} exact />
+          <Route path="success" element={<Success />} exact />
+          <Route path="error" element={<Error />} exact />
+          <Route path="404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
         <Footer />
       </Router>

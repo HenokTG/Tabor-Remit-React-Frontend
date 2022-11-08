@@ -40,7 +40,7 @@ function Packages({ packId, pkData, packUSD, serviceCharge, setSummaryMax }) {
       <div className="package-footer">
         <span className="package-footer-icon">!</span>
         <span className="package-footer-text">
-          includes {serviceCharge * 100}% Service Charge
+          includes {(serviceCharge * 100).toFixed(2)}% Service Charge
         </span>
       </div>
     </div>

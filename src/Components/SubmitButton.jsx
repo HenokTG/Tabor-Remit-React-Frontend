@@ -1,5 +1,4 @@
 import React from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
@@ -11,7 +10,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function SubmitButton() {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const [promoKey, setPromoKey] = useState("");
   const [valCharged, setValCharged] = useState(0);
@@ -31,10 +30,10 @@ function SubmitButton() {
       : "NOPROMO";
     setPromoKey(prKey);
     setValCharged(chargedAmount);
-  }, [chargedAmount]);
+  }, [chargedAmount]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const paymentDetail = {
-    AgentCode: "Henok",
+    AgentCode: "Agent1",
     phoneNumber: phoneNo,
     operatorID: operatorSelected.operator.id,
     packageID: packageSelected.package.id,
@@ -71,27 +70,17 @@ function SubmitButton() {
               },
             ],
           });
-          // Your code here after create the order
-          console.log("Order ID: ", orderId);
           return orderId;
         }}
         onApprove={async function (data, actions) {
-          const details = await actions.order.capture();
-          toast.success(
-            "Transaction Completed. Thank you, " +
-              details.payer.name.given_name,
-            { duration: 5000 }
-          );
-          console.log("Check Order ID: ", data);
-          handleInvoice(paymentDetail, history, data.orderID);
+          await actions.order.capture();
+          handleInvoice(paymentDetail, navigate, data.orderID);
         }}
         onCancel={function () {
-          toast("Transaction cancelled.");
+          navigate("/error");
         }}
         onError={function () {
-          toast.error(
-            "There was an error with your transaction. Please Try Again"
-          );
+          navigate("/error");
         }}
       />
     </section>

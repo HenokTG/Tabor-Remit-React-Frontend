@@ -11,18 +11,25 @@ export const returnSummary = (phoneNo, operator, mobPackage, promo) => {
     phoneNo.slice(5, 7) +
     phoneNo.slice(7, 9);
   const summaryData = [
-    { lineTitle: "Country", lineValue: "Ethiopia" },
-    { lineTitle: "Phone Number", lineValue: customerNumber },
-    { lineTitle: "Operator", lineValue: operator && operator.operator_name },
+    { id: 1, lineTitle: "Country", lineValue: "Ethiopia" },
+    { id: 2, lineTitle: "Phone Number", lineValue: customerNumber },
     {
+      id: 3,
+      lineTitle: "Operator",
+      lineValue: operator && operator.operator_name,
+    },
+    {
+      id: 4,
       lineTitle: "Operator Discount",
       lineValue: `${operator && operator.operator_discount_rate * 100}%`,
     },
     {
-      lineTitle: "Airtime Amount",
+      id: 5,
+      lineTitle: "Airtime Amount Selected",
       lineValue: mobPackage && `${mobPackage.airtime_value} Birr`,
     },
     {
+      id: 6,
       lineTitle: "Promotion Discount",
       lineValue: `${promo && promo.promo_discount_rate * 100}%`,
     },
@@ -34,7 +41,6 @@ export const returnSummary = (phoneNo, operator, mobPackage, promo) => {
 //Fetch List of Operators
 export const fetchOperators = (
   setOperatorsList,
-  setIsLoadingFailed,
   setOperatorSelected,
   setSummaryMax
 ) => {
@@ -62,7 +68,6 @@ export const fetchOperators = (
       }
     })
     .catch(function (error) {
-      setIsLoadingFailed(true);
       console.log(error.toJSON());
       console.error("Caution: No Operator list is fetched to render!");
     });
@@ -90,8 +95,10 @@ export const fetchPackages = (
         );
       setPackagesList(packageList);
       setIsLoading(false);
+      setIsLoadingFailed(false);
     })
     .catch(function (error) {
+      setIsLoading(false);
       setIsLoadingFailed(true);
       console.log(error.toJSON());
       console.error("Caution: No Package list is fetched to render!");
@@ -101,14 +108,10 @@ export const fetchPackages = (
 // Check if the Promo Code submited is Valid.
 export const checkPromoCode = (e, promocode, setSummaryMax, setIsPromoted) => {
   e.preventDefault();
-  console.log("Promo Code Submited!", promocode);
-
   axiosInstance
     .get(`api/remit/promo-codes/${promocode}`)
     .then((res) => {
       if (res.data.message) {
-        const invalidPromo = res.data.message;
-        console.log("Promo Status: ", invalidPromo);
         setSummaryMax(5);
         setIsPromoted({
           isAdd: true,
@@ -134,14 +137,12 @@ export const checkPromoCode = (e, promocode, setSummaryMax, setIsPromoted) => {
 };
 
 // Submit Invoive....this is after transaction is approved
-export const handleInvoice = (paymentDetail, history, orderID) => {
-  console.log("Payment redirected to Paypal");
-  console.log("Payment Detail: ", paymentDetail);
+export const handleInvoice = (paymentDetail, navigate, orderID) => {
   const postURL = "api/remit/invoices/" + orderID;
   axiosInstance
     .post(postURL, paymentDetail)
     .then(function (response) {
-      window.location.replace(window.location.origin);
+      navigate("/success");
     })
     .catch(function (error) {
       console.log(error);

@@ -3,8 +3,7 @@ import React from "react";
 import { useGlobalContext } from "../context";
 
 function Operators({ operatorsList }) {
-  const { setSummaryMax, setOperatorSelected, chargedAmount } =
-    useGlobalContext();
+  const { setSummaryMax, setOperatorSelected } = useGlobalContext();
 
   const chooseOperator = (operatorId) => {
     const operatorPicked = operatorsList.filter(

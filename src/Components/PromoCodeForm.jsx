@@ -18,12 +18,6 @@ function PromoCodeForm() {
   const setPromotedAmount = () => {
     const promoDisc = isPromoted.promoCode.promo_discount_rate;
     setChargedAmount(chargedAmount * (1 - promoDisc));
-    console.log(
-      "Promo Check: ",
-      chargedAmount,
-      promoDisc,
-      isPromoted.promoCode
-    );
   };
   const resetAmount = () => {
     const packUSD =
@@ -40,7 +34,7 @@ function PromoCodeForm() {
       setPromotedAmount();
     } else {
       resetAmount();
-      setSummaryMax(4);
+      setSummaryMax(5);
     }
   }, [isPromoted]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -58,7 +52,7 @@ function PromoCodeForm() {
           onSubmit={(e) =>
             checkPromoCode(e, promoCodeValue, setSummaryMax, setIsPromoted)
           }
-          className="phone-form"
+          className="promo-form"
         >
           <input
             type="text"
@@ -69,7 +63,7 @@ function PromoCodeForm() {
             value={promoCodeValue}
             onChange={(e) => setPromoCodeValue(e.target.value)}
           />
-          <button type="submit" className="btn promoCode-btn  block ">
+          <button type="submit" className="btn promoCode-btn  block">
             Submit
           </button>
         </form>
