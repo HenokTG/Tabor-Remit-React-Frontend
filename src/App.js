@@ -16,6 +16,7 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 
 import HomePage from "./Pages/Homepage";
+import Home from "./Pages/Landing";
 import Summary from "./Pages/Summary";
 import Error from "./Pages/Error";
 import Success from "./Pages/Success";
@@ -23,11 +24,11 @@ import NotFound from "./Pages/NotFound";
 
 function App() {
   return (
-    <div className={`App`}>
+    <div className="App font-serif">
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} exact />
+          <Route path="/" element={<Home />} exact />
           <Route path="summary" element={<Summary />} exact />
           <Route path="success" element={<Success />} exact />
           <Route path="error" element={<Error />} exact />

@@ -1,4 +1,12 @@
 /* CSS for Home Page  */
+.download-bg {
+    height: 32rem;
+}
+
+.download-img {
+    height: 40rem;
+}
+
 .home-conatainer {
     display: flex;
     flex-flow: row wrap;

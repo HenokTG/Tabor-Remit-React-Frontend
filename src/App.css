@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  color: #004A59;
+  /* color: #004A59; */
 }
 
 .App-logo {
@@ -16,26 +16,16 @@
 
 .App-header {
   position: fixed;
-  z-index: 2;
+  z-index: 50;
   top: 0px;
   left: 0px;
   right: -10px;
-  background-color: rgba(249, 245, 245, 0.99);
+  background-color: rgb(236, 241, 241);
   min-height: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   padding-left: 5vw;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
-  border-bottom-left-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
-  box-shadow: rgb(204, 199, 199) 0 1px 2px 1px;
 }
 
-.App-header h1 {
-  font-family: 'Brush Script MT', cursive;
-}
 
 .App-footer {
   display: flex;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import footerImage from "../Images/remittance.jpg";
 
-import PhoneForm from "../Components/RecieverPhoneForm";
+import PhoneForm from "../Components/HowItWorks";
 import shareLogo from "../Images/Remit-Bg.png";
 import payPalLogo from "../Images/paypal-logo.png";
 
