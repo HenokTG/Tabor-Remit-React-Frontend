@@ -45,8 +45,8 @@
 }
 
 .amount-edit-btn {
-    border: 1px solid #198CF0FF;
-    color: #198CF0FF;
+    border: 1px solid #a855f7;
+    color: #7e22ce;
     background-color: aliceblue;
     padding: 0.25rem 1rem;
     border-radius: 0.5rem;
@@ -113,7 +113,7 @@
 
 .pack-Container {
     min-width: 300px;
-    background-color: #0c76bd;
+    background-color: #9333ea;
     margin: 0.35rem 0.35rem;
     padding: 0.05rem 1rem;
     border-radius: 0.25rem;
@@ -163,7 +163,7 @@
 
 .promoCode-input-conatainer h4 {
     display: inline-block;
-    outline: #000 1px solid;
+    outline: 1px solid #000;
     padding: 0.25rem 1rem;
     border-radius: 1rem;
 }
@@ -178,14 +178,13 @@
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    column-gap: 0rem;
+    column-gap: 0;
 }
 
 #promoCode-id {
     width: 100%;
-    background-color: transparent;
-    color: #004A59;
     text-align: left;
+    border: 2px solid #000;
     padding: 0.5rem 1rem;
     margin-top: 0.5rem;
     min-height: 2.5rem;
@@ -202,9 +201,9 @@
 
 .promoCode-btn {
     display: inline-block;
-    width: auto;
+    padding-inline: 2rem;
     color: #fafdfe;
-    background-color: #57b750;
+    background-color: #a855f7;
     border-radius: 0;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
@@ -221,39 +220,10 @@
     text-align: left;
 }
 
-#pay-img {
-    margin: 1rem 0 0.25rem;
+#paypal-img {
+    margin: 2rem;
     height: 3.5rem;
 }
-
-#paypal-img {
-    margin: 1rem 0 0.25rem;
-    height: 3rem;
-}
-
-.pay-btn {
-    color: #fafdfe;
-    background-color: #3fa5e9;
-    border-radius: 2rem;
-    margin: 1rem 0;
-    min-height: 2.5rem;
-    padding: 0 auto;
-    cursor: pointer;
-}
-
-.pay-btn:hover {
-    background: #0070ba;
-    transform: scale(0.95);
-}
-
-.pay-btn::after {
-    content: "Continue";
-}
-
-.pay-btn:hover::after {
-    content: "Pay with PayPal";
-}
-
 
 @media screen and (max-width : 324px) {
     .summary-conatainer {

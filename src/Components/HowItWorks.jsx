@@ -1,35 +1,28 @@
 import React, { useState } from "react";
 
-import { useGlobalContext } from "../context";
-
-import phone from "../Images/Homepage/How-it-works/phone.png";
-import packages from "../Images/Homepage/How-it-works/packages.png";
-import payment from "../Images/Homepage/How-it-works/pay.png";
-import success from "../Images/Homepage/How-it-works/success.png";
-
 const hotItWorks = [
   {
     id: 1,
-    pic: phone,
+    imgLink: "/static/images/homepage/How-it-works/phone.png",
     title: "Enter Reciever Phone Number",
     detail: "Ea eiusmod nulla amet quis officia adipisicing consectetur.",
   },
   {
     id: 2,
-    pic: packages,
+    imgLink: "/static/images/homepage/How-it-works/packages.png",
     title: "Choose a package",
     detail: "Velit anim ut laboris magna enim deserunt esse.",
   },
   {
     id: 3,
-    pic: payment,
+    imgLink: "/static/images/homepage/How-it-works/pay.png",
     title: "Proceed to payment",
     detail:
       "Proident est ullamco culpa veniam laboris laborum quis anim fugiat.",
   },
   {
     id: 4,
-    pic: success,
+    imgLink: "/static/images/homepage/How-it-works/success.png",
     title: "Phone is Recharged",
     detail: "Esse amet laboris pariatur laborum veniam ut id ad eiusmod.",
   },
@@ -39,18 +32,18 @@ function HowItWorks() {
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <div className="bg-white py-16 ">
+    <div className="bg-white pt-16 pb-1" id="how-it-works">
       <h1 className="font-bold">How it works?</h1>
-      <div className="py-12 flex flex-row flex-nowrap items-center justify-evenly">
+      <div className="flex flex-row flex-wrap items-center justify-evenly">
         {hotItWorks.map((elem) => (
           <div
             key={elem.id}
-            className="rounded-md bg-white border-gray-200 shadow-2xl overflow-hidden w-72 border-2"
+            className="rounded-md bg-white border-gray-200 shadow-2xl overflow-hidden w-5/6 sm:w-2/3 md:w-72 border-2 mt-12 mx-4"
           >
             <img
-              src={elem.pic}
+              src={elem.imgLink}
               alt={elem.title}
-              className="h-32 sm:h-48 w-full shadow-md object-cover"
+              className="h-52 xs:h-60 sm:h-80 md:h-48 w-full shadow-md object-cover"
             />
             <div className="m-4">
               <span className="font-bold">{elem.title}</span>
@@ -60,8 +53,8 @@ function HowItWorks() {
         ))}
       </div>
       {showMore && (
-        <div className="py-8">
-          <ol className="mx-40 list-decimal list-outside pr-12 leading-6 text-justify">
+        <div className="py-16">
+          <ol className="mx-12 xs:mx-24 lg:mx-32 xl:mx-40 list-decimal list-outside leading-6 text-justify">
             <li>
               Enter the reciever phone number in the entry field and press topup
               button, you will be redirected to "Summary" page.
@@ -103,7 +96,7 @@ function HowItWorks() {
               return "Homepage" to try again.
             </li>
           </ol>
-          <div className="w-auto mt-4">
+          <div className="w-auto mt-8">
             <h1
               onClick={() => setShowMore(false)}
               className="font-bold hover: cursor-pointer hover:italic hover:underline text-sm inline-block"
@@ -115,7 +108,7 @@ function HowItWorks() {
       )}
 
       {!showMore && (
-        <div className="w-auto mb-8">
+        <div className="w-auto my-12">
           <h1
             onClick={() => setShowMore(true)}
             className="font-bold hover: cursor-pointer hover:italic hover:underline text-sm inline-block"

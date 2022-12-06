@@ -1,13 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
 import { useGlobalContext } from "../context";
 import { handleInvoice } from "../modules";
-
-import payPalLogo from "../Images/paypal-logo.png";
-import { useState } from "react";
-import { useEffect } from "react";
 
 function SubmitButton() {
   const navigate = useNavigate();
@@ -45,8 +41,12 @@ function SubmitButton() {
 
   return (
     <section className="pay-with-paypal-section">
-      <img src={payPalLogo} alt="Pay with PayPal" id="pay-img" />
-      <h4 style={{ fontSize: "14px", marginBottom: "1rem" }}>
+      <img
+        src="/static/images/paypal-logo.png"
+        alt="Pay with PayPal"
+        id="paypal-img"
+      />
+      <h4 style={{ fontSize: "14px", margin: "2rem" }}>
         You will be redirected to PayPal
       </h4>
       <PayPalButtons

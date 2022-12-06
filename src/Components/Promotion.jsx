@@ -1,42 +1,37 @@
-import React, { useState } from "react";
-
-import Clock from "../Images/Homepage/promo-section/Clock.png";
-import Worldwide from "../Images/Homepage/promo-section/Worldwide.png";
-import Bag from "../Images/Homepage/promo-section/Bag.png";
+import React from "react";
 
 const PromotionList = [
   {
     id: 1,
     promoTitle: "Fast",
-    logo: Clock,
-    content:
-      "Aute nulla ullamco qui do tempor esse reprehenderit aliqua adipisicing Lorem id.",
+    imgLink: "/static/images/homepage/promo-section/Clock.png",
+    content: "Aute nulla ullamco qui do tempor esse reprehenderit aliqua.",
   },
   {
     id: 2,
     promoTitle: "Safe",
-    logo: Worldwide,
-    content:
-      "Aliqua aliquip sint Lorem eiusmod enim consequat anim ullamco sunt commodo et dolore.",
+    imgLink: "/static/images/homepage/promo-section/Worldwide.png",
+    content: "Aliqua aliquip sint Lorem eiusmod enim consequat anim .",
   },
   {
     id: 3,
     promoTitle: "Simple",
-    logo: Bag,
-    content:
-      "Commodo laborum culpa consectetur exercitation labore laborum veniam dolore nulla officia sint commodo eiusmod eu.",
+    imgLink: "/static/images/homepage/promo-section/Bag.png",
+    content: "Commodo laborum culpa consectetur exercitation labore.",
   },
 ];
 
 function Promotions() {
   return (
-    <div className="bg-white py-24 ">
-      <h1 className="">Reacharge fast, secure and simple</h1>
-      <div className="grid grid-cols-3 justify-items-center content-center gap-4 mt-20">
+    <div className="bg-white py-24 px-8">
+      <h1 className="text-3xl xs:text-4xl">
+        Reacharge fast, secure and simple
+      </h1>
+      <div className="flex flex-row flex-wrap items-center justify-evenly mt-12">
         {PromotionList.map((item) => (
-          <div key={item.id} className="text-center w-60">
+          <div key={item.id} className="text-center w-60 m-4">
             <img
-              src={item.logo}
+              src={item.imgLink}
               alt={item.promoTitle}
               className="h-16 mb-8 inline-block"
             />

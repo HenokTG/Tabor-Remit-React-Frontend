@@ -1,51 +1,57 @@
-import React, { useState } from "react";
-
-import iPhone from "../Images/Homepage/download-section/iPhone.png";
-import googlePlay from "../Images/Homepage/download-section/google-playstore.png";
-import appleStore from "../Images/Homepage/download-section/apple.png";
+import React from "react";
 
 const downloadAppList = [
-  { id: 1, text: "Google Playstore", logo: googlePlay, downloadLink: "#" },
-  { id: 2, text: "Apple Store", logo: appleStore, downloadLink: "#" },
+  {
+    id: 1,
+    text: "Google Playstore",
+    imgLink: "/static/images/homepage/download-section/google-playstore.png",
+    downloadLink: "#",
+  },
+  {
+    id: 2,
+    text: "Apple Store",
+    imgLink: "/static/images/homepage/download-section/apple.png",
+    downloadLink: "#",
+  },
 ];
-
 
 function DownloadApp() {
   return (
-    <div className="download-bg bg-gradient-to-r from-purple-700 to-purple-900 relative mt-20 flex flex-row justify-end items-center">
+    <div className="download-bg bg-gradient-to-r from-purple-700 to-purple-900 flex flex-row justify-evenly items-center md:items-end md:mt-20 md:justify-between">
       <img
-        src={iPhone}
+        src="/static/images/homepage/download-section/iPhone.png"
         alt="download mobile app"
-        className="download-img bottom-0 left-32 absolute"
+        className="download-img hidden md:block"
       />
-      <div className="grid grid-cols-6 text-white">
-        <div className="col-start-4 col-span-2 text-left">
-          <h1 className="font-bold">Download Our App Now</h1>
-          <div className="text-md my-12">
-            <p>
-              For best user experience download <strong>Tabs.</strong>{" "}
-              application from Google Playstore or Apple Store.
-            </p>
-            <p>You will be able to purchse mobile package fast and securely.</p>
-          </div>
-          <div className="flex flex-row justify-between items-center">
-            {downloadAppList.map((elem) => (
-              <a
-                href={elem.downloadLink}
-                className="grid grid-cols-7 gap-2 px-2 py-2 w-60 outline outline-2 rounded-md "
-              >
-                <img
-                  src={elem.logo}
-                  alt={elem.text}
-                  className="col-span-2 justify-self-center h-10"
-                />
-                <div className="col-start-3 col-span-5 flex flex-col justify-between items-start">
-                  <p className="text-xs ">Get it on</p>
-                  <p className="text-base ">{elem.text}</p>
-                </div>
-              </a>
-            ))}
-          </div>
+      <div className="download-promo text-left text-white md:pb-6 xl:pb-28 w-full md:w-1/2">
+        <h1 className="font-bold text-2xl sm:text-xl">Download Our App Now</h1>
+        <div className="my-8 md:my-4 lg:my-8">
+          <p className="text-sm sm:text-base mb-4">
+            For best user experience download <strong>Tabs.</strong> application
+            from Google Playstore or Apple Store.
+          </p>
+          <p className="text-sm sm:text-base">
+            You will be able to purchse mobile package fast and securely.
+          </p>
+        </div>
+        <div className="flex flex-row justify-start items-center flex-wrap">
+          {downloadAppList.map((elem) => (
+            <a
+              key={elem.id}
+              href={elem.downloadLink}
+              className="grid grid-cols-7 gap-2 p-1 lg:p-2 w-52 outline outline-2 rounded-md m-2"
+            >
+              <img
+                src={elem.imgLink}
+                alt={elem.text}
+                className="col-span-2 justify-self-center h-10"
+              />
+              <div className="col-start-3 col-span-5 flex flex-col justify-between items-start">
+                <p className="text-xs ">Get it on</p>
+                <p className="text-base ">{elem.text}</p>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </div>

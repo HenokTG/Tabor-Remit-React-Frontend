@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import "./CSS/Home.css";
 import "./CSS/Summary.css";
 import "react-notifications-component/dist/theme.css";
 import "animate.css/animate.min.css";
@@ -15,8 +14,7 @@ import "animate.css/animate.min.css";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 
-import HomePage from "./Pages/Homepage";
-import Home from "./Pages/Landing";
+import Home from "./Pages/Landing-page";
 import Summary from "./Pages/Summary";
 import Error from "./Pages/Error";
 import Success from "./Pages/Success";
