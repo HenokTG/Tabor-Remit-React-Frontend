@@ -53,8 +53,8 @@ export default function HeroSection() {
         </p>
       </div>
       <img
-        src="/static/images/Homepage/smiling-girl.jpg"
-        alt="smiling girl"
+        src="/static/images/Homepage/surprised-good-looking-african-american-girl.webp"
+        alt="Surprised good-looking African-American girl"
         className="pr-2 sm:pr-4 lg:pr-6 "
       />
     </div>
