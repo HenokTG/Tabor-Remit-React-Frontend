@@ -55,7 +55,7 @@ export default function HeroSection() {
       <img
         src="/static/images/Homepage/surprised-good-looking-african-american-girl.webp"
         alt="Surprised good-looking African-American girl"
-        className="pr-2 sm:pr-4 lg:pr-6 "
+        className="pr-2 sm:pr-4 lg:pr-6 w-full"
       />
     </div>
   );
